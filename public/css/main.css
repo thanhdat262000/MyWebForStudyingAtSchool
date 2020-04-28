@@ -1,0 +1,85 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+body{
+	background-color: #f3f3f3;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/*Header css*/
+
+.header{
+	width: 100%;
+	height: 92px;
+	background-color: #CD1818;
+	color: #fff;
+}
+
+
+/*Main css*/
+
+.main{
+	width: 100%;
+	background-color: #F3F3F3;
+	color: #2d2d2d;
+}
+
+/*Footer css*/
+
+.footer{
+	background-color: #585454;
+	height: 200px;
+}
+.inner-footer {
+	display: flex;
+	justify-content: center;
+	justify-content: space-between;
+}
+.footer.item {
+	flex-grow: 1;
+	width: 100%;
+	display: block;
+	background-color: #fff;
+	color: #888;
+	margin-top: auto;
+}
+
+/*Scroll to top*/
+
+#scroll__top{
+	display: none; /* Mặc định button sẽ được ẩn*/
+	position: fixed;
+	bottom: 20px;
+	right: 30px; 
+	z-index: 99; /* button được ưu tiên hiển thị đè lên các phần khác*/
+	border: none;
+	outline: none;
+	background-color: rgba(205,24,24,1);
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 10px;
+	transition: all 0.3s linear;
+}
+
+#scroll__top:hover{
+	background-color: rgba(205,24,24,1);
+	transform: scale(1.2);
+}
+
+.fa{
+	color: #fff;
+}
+
+.submain{
+	width: 100%;
+	height: 1300px;
+	background-color: #F3F3F3;
+	color: #2d2d2d;
+}
