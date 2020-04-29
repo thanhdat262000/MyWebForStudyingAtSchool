@@ -19,7 +19,7 @@ block content
                             i.fa.fa-shopping-cart.fa-2x
         .header__menu
             .component__header
-                .header__laptop
+                .header__laptop#laptop-logo
                     a.link__laptop(href='#')
                         i.fa.fa-laptop
                         ul.sub__menu
@@ -64,20 +64,18 @@ block content
     .main.main__form
       .shopping__title
         h2.shopping__title-text Gi&#x1ECF; h&agrave;ng c&#x1EE7;a b&#x1EA1;n
-      .main__star#shopping-items
+      .purchased-products-box
             mixin productCom(product) 
-                .product.product-1#items
-                    .product-image.product-link-image1
-                        a.link-image(href='/')
-                            .product-link-image.product(class!=attributes.class)
-                    .product-name
-                        a.product-link(href='/')=product.productName
-                            a
-                    .product-price=product.buyPrice
-                    .product-description
-                        .product-purchase
-                            a.button-purchase(href="/cart/add/"+product.productId)
-                                i.fa.fa-plus(style='text-align: center;')
+                .sp-box
+                    .sp-box-im(class!=attributes.class)
+                    .sp-box-name
+                        h3.sp-box-namefont= product.productName
+                        .sp-box-color
+                          | M&agrave;u: 
+                          span.sp-box-color-default
+                    .sp-box-price= product.buyPrice
+                    .sp-box-quantity S&#x1ED1; l&#x1B0;&#x1EE3;ng: #{product.quantityOrdered}
+
             if purchasedProducts
                 each product in purchasedProducts
                     +productCom(product)(class=product.productImage)
