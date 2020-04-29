@@ -19,7 +19,7 @@ module.exports.search= function(req, res) {
 }
 module.exports.shopping = function(req,res) {
 	var id = req.signedCookies.sessionId;
-	let sql = 'SELECT productId, quantityOrdered FROM orders WHERE customerId =?';
+	let sql = 'SELECT productId, quantityOrdered FROM orders WHERE customerId =? AND status = "pending"';
 	connection.query(sql,[id], function(error,result,field ) {
 		var purchasedProducts = [];
 		for (var i=0;i<result.length;i++) {

@@ -17,14 +17,13 @@
 	flex-grow: 1;
 }
 
-#shopping__form {
-	width: 600px;
-	margin: 20px auto;
-	border: 2px solid #000;
-	border-radius: 10px;
-	text-align: ;
-	padding: 20px 0;
-}
+/*#shopping__form {
+	width: 700px;
+    margin: 20px auto;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 20px 0;
+}*/
 
 
 .input__form{
@@ -95,8 +94,6 @@
 }
 .link__cancel{
 	display: block;
-.main__form{
-	margin: 30px auto;
 }
 .shopping__title-text {
 	text-align: center;
@@ -108,6 +105,7 @@
 .shopping__form-component{
 	margin: 0px 90px;
 	display: flex;
+	justify-content: center;
 }
 
 .label__input{
@@ -115,9 +113,10 @@
 }
 
 #shopping__form {
-	width: 600px;
+	background-color: #fff;
+	width: 700px;
 	margin: 20px auto;
-	border: 2px solid #000;
+	border: 1px solid #bbb;
 	border-radius: 10px;
 	text-align: ;
 	padding: 20px 0;
@@ -136,7 +135,7 @@
 
 #button-submit {
 	padding: 0 10px;
-	margin: 0px 10px 10px 90px;
+	margin: 0px 10px 10px 50px;
 	height: 30px;
 	border: 0px;
 	width: 100px;
@@ -192,4 +191,72 @@
 }
 .link__cancel{
 	display: block;
+}
+.sp-box {
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto;
+	position: relative;
+	background: #fff;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	border-bottom: 2px solid #eee;
+}
+
+.sp-box-im {
+	width: 200px;
+	height: 100px;
+	padding: 5px;
+	float: left;
+	text-align: center;
+	background: #fff;
+	background-size: cover;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+
+.sp-box-name {
+	display: inline;
+	margin-left: 20px;
+	position: relative;
+	padding-right: 10px;
+}
+.sp-box-namefont{
+	font-size: 16px;
+	font-weight: bold;
+	color: #4a4a4a;
+	margin-bottom: 10px;
+}
+.sp-box-color-default{
+	width: 15px;
+	height: 15px;
+	background-color: #555;
+	display: inline-block;
+	border-radius: 50%;
+}
+.sp-box-price {
+	width: 100px;
+	padding-right: 10px;
+	display: table-cell;
+	vertical-align: top;
+}
+.sp-box-quantity {
+	width: 200px;
+	margin-left: 50px
+}
+.purchased-products-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+}
+#done {
+	margin-top: 250px;
 }
