@@ -12,7 +12,6 @@ module.exports.search= function(req, res) {
 	var q = "'%"+req.query.txtSearch +"%'";
 	let sql = 'SELECT * FROM products WHERE productName LIKE '+ q;
 	connection.query(sql, function(erroe, result, field) {
-		console.log(q);
 		res.render('search', {
 			searchProduct: result
 		})
@@ -29,6 +28,13 @@ module.exports.shopping = function(req,res) {
 		var range = '(' + purchasedProducts.toString() + ')';
 		let sql_select = 'SELECT * FROM products WHERE productId IN' + range;
 		connection.query(sql_select, function(error1,result2,field3) {
+			for (var i=0;i<result.length;i++) {
+				for (var j=0; j < result2.length;j++) {
+					if (result[i].productId == result2[j].productId) {
+						result2[j].quantityOrdered = result[i].quantityOrdered;
+					}
+				}
+			}
 			res.render('shopping',{
 			purchasedProducts: result2
 		})
@@ -40,10 +46,14 @@ module.exports.postSuccess = function(req,res) {
 	var name = req.body.txtName;
 	var phone= req.body.txtPhone;
 	var address = req.body.txtAddress;
-	// let sql_1 = 'INSERT INTO customers SET customerId =?, customerName =?, phone =?, address =?';
-	// connection.query(sql_1, [id, name, phone, address], function(error, result, field) {
-	// 	if (error) throw error;
-	// })
+	let sql = 'UPDATE customers SET customerName =?, phone =?, address =? WHERE customerId =?';
+	connection.query(sql, [name, phone, address, id], function(error, result, field) {
+			if (error) throw error;
+	 })
+	let sql_2 = 'UPDATE orders SET status = "ordered" WHERE customerId = ?';
+	connection.query(sql_2, [id], function(error, result, field) {
+		res.render('success');
+	})
 	// var orderCode = shortid.generate();
 	// let sql_2 = 'INSERT INTO orders SET orderCode = ?, orderDate = NOW(), customerId = ?, status =?';
 	// connection.query(sql_2, [orderCode,id, 'ordered'],function(error,result,field) {
@@ -51,7 +61,7 @@ module.exports.postSuccess = function(req,res) {
 	// })
 	
 	// let sql_3 = 'INSERT INTO orderdetails SET orderCode =?, p'
-	res.render('success')
+	
 }
 // module.exports.create = function(req, res) {
 // 	res.render('users/create');
