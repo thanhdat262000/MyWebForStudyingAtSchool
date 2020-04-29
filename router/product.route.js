@@ -7,7 +7,7 @@ router.use(cookieParser());
 router.get('/apple', controller.apple)
 router.get('/dell', controller.dell) 
 router.get('/asus', controller.asus)
-router.get('/hp', controller.asus)
-router.get('/lenovo', controller.apple)
+router.get('/hp', controller.hp)
+router.get('/lenovo', controller.lenovo)
 // router.post('/create', upload.single('avatar'),controller.postCreate)
 module.exports = router;

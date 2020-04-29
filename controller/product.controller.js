@@ -14,7 +14,8 @@ module.exports.dell =  function(req, res) {
 	let sql = 'SELECT * FROM `products` WHERE productBrand =? '
 	connection.query(sql, [productBrand],function(error, result, field) {
 		res.render('product/dell', {
-			products: result
+			products: result,
+			title: productBrand
 		})
 	})
 }
@@ -23,7 +24,28 @@ module.exports.asus =  function(req, res) {
 	let sql = 'SELECT * FROM `products` WHERE productBrand =? '
 	connection.query(sql, [productBrand],function(error, result, field) {
 		res.render('product/asus', {
-			products: result
+			products: result,
+			title: productBrand
+		})
+	})
+}
+module.exports.hp =  function(req, res) {
+	var productBrand = 'Asus';
+	let sql = 'SELECT * FROM `products` WHERE productBrand =? '
+	connection.query(sql, [productBrand],function(error, result, field) {
+		res.render('product/asus', {
+			products: result,
+			title: productBrand
+		})
+	})
+}
+module.exports.lenovo =  function(req, res) {
+	var productBrand = 'Macbook';
+	let sql = 'SELECT * FROM `products` WHERE productBrand =? '
+	connection.query(sql, [productBrand],function(error, result, field) {
+		res.render('product/macbook', {
+			products: result,
+			title: productBrand
 		})
 	})
 }

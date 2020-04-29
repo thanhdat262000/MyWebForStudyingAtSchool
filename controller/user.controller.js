@@ -4,16 +4,19 @@ module.exports.index =  function(req, res) {
 	let sql = 'SELECT * FROM `products` ORDER BY `quantityBought` DESC LIMIT 4'
 	connection.query(sql, function(error, result, field) {
 		res.render('index', {
-			bestSellerProduct: result
+			bestSellerProduct: result,
+			title: "Trang chủ"
 		})
 	})
 }
 module.exports.search= function(req, res) {
 	var q = "'%"+req.query.txtSearch +"%'";
+	var title = "Searching for "+ req.query.txtSearch;
 	let sql = 'SELECT * FROM products WHERE productName LIKE '+ q;
 	connection.query(sql, function(erroe, result, field) {
 		res.render('search', {
-			searchProduct: result
+			searchProduct: result,
+			title: title
 		})
 	})
 }
@@ -36,7 +39,8 @@ module.exports.shopping = function(req,res) {
 				}
 			}
 			res.render('shopping',{
-			purchasedProducts: result2
+			purchasedProducts: result2,
+			title: "Đơn hàng"
 		})
 		})
 })
@@ -52,7 +56,9 @@ module.exports.postSuccess = function(req,res) {
 	 })
 	let sql_2 = 'UPDATE orders SET status = "ordered" WHERE customerId = ?';
 	connection.query(sql_2, [id], function(error, result, field) {
-		res.render('success');
+		res.render('success', {
+			title: "Mua hàng thành công"
+		});
 	})
 	// var orderCode = shortid.generate();
 	// let sql_2 = 'INSERT INTO orders SET orderCode = ?, orderDate = NOW(), customerId = ?, status =?';
