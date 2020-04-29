@@ -7,7 +7,7 @@ module.exports.add=  function(req, res) {
 	let sql = 'SELECT productId, quantityOrdered FROM orders WHERE productId =?';
 	connection.query(sql,[productId], function(error,result,field) {
 		if (result.length == 0) {
-			let sql_insertOrder = 'INSERT INTO orders SET orderCode =?, orderDate = NOW(), customerId =?, productId =?, quantityOrdered= 1'
+			let sql_insertOrder = 'INSERT INTO orders SET orderCode =?, orderDate = NOW(), customerId =?, productId =?, quantityOrdered= 1, status = "pending"'
 			connection.query(sql_insertOrder, [orderCode, id, productId], function(error1, result1,field1) {
 			if (error) throw error;
 		})
