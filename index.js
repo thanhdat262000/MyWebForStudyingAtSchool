@@ -29,7 +29,7 @@ app.use(function(req,res,next) {
 	res.locals.session = req.session;
 	next();
 })
-const port = 3000;
+const port = process.env.PORT ||3000;
 connection.connect((err)=>{
 	if (err) throw err;
 	console.log('Connecting MySql...' );
