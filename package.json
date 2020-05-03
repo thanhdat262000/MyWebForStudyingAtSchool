@@ -4,7 +4,8 @@
   "description": "Express",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect index.js",
+    "dev": "nodemon --inspect index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -25,13 +26,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thanhdat262000/Express.git"
-  },
-  "bugs": {
-    "url": "https://github.com/thanhdat262000/Express/issues"
-  },
-  "homepage": "https://github.com/thanhdat262000/Express#readme"
+  }
 }
