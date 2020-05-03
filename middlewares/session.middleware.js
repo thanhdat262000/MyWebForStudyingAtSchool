@@ -1,4 +1,4 @@
-var shortId = require('shortId');
+var shortId = require('shortid');
 const connection = require('../dataHandle');
 module.exports  = function(req,res,next) {
 	if (!req.signedCookies.sessionId) {
