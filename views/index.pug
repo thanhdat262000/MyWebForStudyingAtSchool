@@ -17,6 +17,8 @@ block content
                     a(href='/shopping')
                         button#shopping-cart.button
                             i.fa.fa-shopping-cart.fa-2x
+                            if session.countTotal>0
+                                span.countTotal= session.countTotal
         .header__menu
             .component__header
                 .header__laptop#laptop-logo

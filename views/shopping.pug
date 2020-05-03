@@ -17,6 +17,8 @@ block content
                     a(href='/shopping')
                         button#shopping-cart.button
                             i.fa.fa-shopping-cart.fa-2x
+                            if session.countTotal>0
+                                span.countTotal= session.countTotal
         .header__menu
             .component__header
                 .header__laptop#laptop-logo
@@ -74,7 +76,7 @@ block content
                           | M&agrave;u: 
                           span.sp-box-color-default
                     .sp-box-price= product.buyPrice
-                    .sp-box-quantity S&#x1ED1; l&#x1B0;&#x1EE3;ng: #{product.quantityOrdered}
+                    .sp-box-quantity S&#x1ED1; l&#x1B0;&#x1EE3;ng: #{product.quantity}
 
             if purchasedProducts
                 each product in purchasedProducts

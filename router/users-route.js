@@ -2,7 +2,6 @@ var express = require('express');
 var multer  = require('multer');
 var upload = multer({dest: './public/upload'})
 var cookieParser = require('cookie-parser');
-var authMiddleware = require('../middlewares/auth.middleware');
 var router = express.Router();
 var controller = require('../controller/user.controller')
 router.use(cookieParser());

@@ -56,7 +56,7 @@
 
 #shopping-cart{
 	margin: 9px 0px;
-	width: 50px;
+	width: 70px;
 	height: 38px;
 	background-color: #CD1818;
 	outline: none;
@@ -136,4 +136,14 @@
 #laptop-logo{
 	padding-top: 10px;
 	
+}
+.countTotal {
+	color: #fff;
+	border-radius: 50%;
+	font-weight: bold;
+	background-color: orange;
+	padding: 1px 5px;
+	position: relative;
+	top: -8px;
+	right: 6px;
 }

@@ -10,5 +10,16 @@ module.exports  = function(req,res,next) {
 		if (error) throw error;
 	})
 	}
+	else {
+		let sql = 'SELECT customerId FROM customers WHERE customerId = ?';
+		connection.query(sql,[req.signedCookies.sessionId],function(error,result,field) {
+			if (result.length == 0) {
+				let sql_id = 'INSERT INTO customers SET customerId = ?';
+				connection.query(sql_id,[req.signedCookies.sessionId], function(error,result,field) {
+					if (error) throw error;
+				})
+			}
+		})
+	}
 	next();
 }
