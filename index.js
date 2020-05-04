@@ -30,6 +30,7 @@ app.use(function(req,res,next) {
 	next();
 })
 const port = process.env.PORT ||3000;
+app.listen(port, () => console.log('Example app listening at http://localhost' + port));
 connection.connect((err)=>{
 	if (err) throw err;
 	console.log('Connecting MySql...' );
@@ -40,6 +41,5 @@ app.set('views', './views');
 app.use('/', userRoute);
 app.use('/product', productRoute);
 app.use('/cart', cartRoute);
-app.listen(port, () => console.log('Example app listening at http://localhost' + port));
 //signed cookie: thêm 1 cái signature riêng biệt cho từng cookie
 //pagination
