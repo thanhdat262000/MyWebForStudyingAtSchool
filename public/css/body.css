@@ -226,3 +226,6 @@
 	margin-bottom: 20px;
 	display: flex;
 }
+html {
+	scroll-behavior: smooth;
+}
