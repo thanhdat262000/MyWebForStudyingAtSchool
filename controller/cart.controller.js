@@ -26,7 +26,7 @@ const connection = require('../dataHandle');
 
 module.exports.add = function(req, res) {
 	var productId = req.params.productId;
-	let sql = 'SELECT `productName`, `productBrand`, `productScreen`, `productCPU`, `productRAM`, `productVGA`, `productOS`, `productWeight`, `productImage`, FORMAT(`buyPrice`,0) buyPrice FROM `products` WHERE productId = ?';
+	let sql = 'SELECT * FROM `products` WHERE productId = ?';
 	connection.query(sql, [productId], function(error,result,field) {
 		if (!req.session.countTotal) req.session.countTotal =1;
 		else req.session.countTotal++;
