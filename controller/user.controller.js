@@ -1,7 +1,7 @@
 var shortid = require('shortid');
 const connection = require('../dataHandle');
 module.exports.index =  function(req, res) {
-	let sql = 'SELECT * FROM `products` ORDER BY `quantityBought` DESC LIMIT 4'
+	let sql = 'SELECT `productName`, `productBrand`, `productScreen`, `productCPU`, `productRAM`, `productVGA`, `productOS`, `productWeight`, `productImage`, FORMAT(`buyPrice`,0) buyPrice FROM `products` ORDER BY `quantityBought` DESC LIMIT 4'
 	connection.query(sql, function(error, result, field) {
 		res.render('index', {
 			bestSellerProduct: result,
@@ -12,7 +12,7 @@ module.exports.index =  function(req, res) {
 module.exports.search= function(req, res) {
 	var q = "'%"+req.query.txtSearch +"%'";
 	var title = "Searching for "+ req.query.txtSearch;
-	let sql = 'SELECT * FROM products WHERE productName LIKE '+ q;
+	let sql = 'SELECT `productName`, `productBrand`, `productScreen`, `productCPU`, `productRAM`, `productVGA`, `productOS`, `productWeight`, `productImage`, FORMAT(`buyPrice`,0) buyPrice FROM `products` WHERE productName LIKE '+ q;
 	connection.query(sql, function(error, result, field) {
 		res.render('search', {
 			searchProduct: result,
