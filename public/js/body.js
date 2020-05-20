@@ -5,6 +5,7 @@
 
 var slideIndex = 1;
 currentSlide(slideIndex);
+autoShowSlides();
 
 function currentSlide(slide){
 	showSlide(slideIndex = slide);
@@ -31,4 +32,17 @@ function showSlide(slide){
 	}
 	images[slideIndex-1].style.display = "block";
 	buttons[slideIndex-1].className += " active";
+
+}
+
+function autoShowSlides() {
+  var i;
+  var slides = document.getElementsByClassName("main__slideshow-element");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(autoShowSlides, 5000); // Change image every 2 seconds
 }

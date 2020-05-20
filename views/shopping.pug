@@ -77,11 +77,11 @@ block content
                           span.sp-box-color-default
                     .sp-box-price= product.buyPrice
                     .sp-box-quantity S&#x1ED1; l&#x1B0;&#x1EE3;ng: #{product.quantity}
+                    span.cancel x
 
             if purchasedProducts
                 each product in purchasedProducts
                     +productCom(product)(class=product.productImage)
-
       .shopping__form
         form#shopping__form(method='post', action='/shopping/success', onsubmit= 'return checkSubmit()')
           .shopping__form-component
