@@ -27,12 +27,17 @@ function checkSubmit() {
 	}
 	// return status;
 }
-function purchasedProducts() {
-	var products = []
-	for (var i =0;i< sessionStorage.length) {
-		var index = 'item' + i;
-		var data = JSON.parse(sessionStorage.getItem(index));
-		products.push(data);
-	}
-	return products;
+function returnHomePage() {
+	$(document).ready(function() {
+		$('.backHomepage').click(function(e) {
+			e.preventDefault();
+			$.ajax({
+				url: '/',
+				type: 'GET',
+			}).done(function(res) {
+				console.log(res);
+			})
+			console.log('hello')
+		})
+	})
 }

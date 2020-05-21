@@ -28,8 +28,15 @@ module.exports.add = function(req, res) {
 	var productId = req.params.productId;
 	let sql = 'SELECT * FROM `products` WHERE productId = ?';
 	connection.query(sql, [productId], function(error,result,field) {
-		if (!req.session.countTotal) req.session.countTotal =1;
-		else req.session.countTotal++;
+		if (!req.session.countTotal) {
+			req.session.countTotal =1;
+			req.session.totalPrice = result[0].buyPrice;
+		}
+		else {
+			req.session.countTotal++;
+			req.session.totalPrice += result[0].buyPrice;
+		}
+		console.log(typeof(req.session.totalPrice));
 		if (!req.session.cart) {
 			req.session.cart = {};
 			var product = result[0];
