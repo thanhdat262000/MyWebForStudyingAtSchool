@@ -18,7 +18,7 @@ block content
                         button#shopping-cart.button
                             i.fa.fa-shopping-cart.fa-2x
                             if session.countTotal>0
-                                span.countTotal= session.countTotal
+                                span.countTotal= session.cart.length
         .header__menu
             .component__header
                 .header__laptop#laptop-logo
@@ -216,5 +216,4 @@ block content
 
     script(type='text/javascript', src='/js/header.js')
     script(type='text/javascript', src='/js/body.js')
-    script(type='text/javascript', src='/js/cart.js')
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")

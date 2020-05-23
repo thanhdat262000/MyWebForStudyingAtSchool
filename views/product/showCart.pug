@@ -1,0 +1,64 @@
+if session.countTotal > 0
+    .shopping__title
+        h2.shopping__title-text Gi&#x1ECF; h&agrave;ng c&#x1EE7;a b&#x1EA1;n
+    .purchased-products-box
+        mixin productCom(product) 
+            .sp-box
+                input(type="hidden", value= product.productId)
+                .sp-box-im(class!=attributes.class)
+                .sp-box-name
+                    h3.sp-box-namefont= product.productName
+                    .sp-box-color
+                    | M&agrave;u: 
+                    span.sp-box-color-default
+                .sp-box-price #{product.buyPrice}
+                    sup đ
+                .sp-box-quantity
+                    span.plusAndsubtract.plus +
+                    input.quantity(type="text", value= product.quantity, name="quantity" readonly)
+                    span.plusAndsubtract.subtract -
+                span.cancel x
+        each product in purchasedProducts
+                +productCom(product)(class=product.productImage)
+        .bill
+            label.total Tổng tiền:
+            b.totalPrice #{session.totalPrice}
+                sup đ
+    .shopping__form
+        form#shopping__form(method='post', action='/shopping/success', onsubmit= 'return checkSubmit()')
+            .shopping__form-component
+                .label__input
+                label.shopping__form-label(for="txtName")
+                    b H&#x1ECD; v&agrave; t&ecirc;n:
+                input#txtName.input__form(type='text', name='txtName', placeholder='Nhập họ và tên')
+                div(id='noti error-name')
+            .shopping__form-component
+                .label__input
+                label.shopping__form-label(for="txtPhone")
+                    b S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i:
+                    span (*)
+                input#txtPhone.input__form(type='text', name='txtPhone', placeholder='Nhập số điện thoại')
+                div(id='noti error-phone')
+            .shopping__form-component
+                .label__input
+                label.shopping__form-label(for="txtAddress")
+                    b &Dstrok;&#x1ECB;a ch&#x1EC9;:
+                input#txtAddress.input__form(type='text', name='txtAddress', placeholder='Nhập địa chỉ')
+                div(id='noti error-address')
+            br
+            .shopping__form-component
+                input#button-submit(type='submit', name='btnSubmit', value='Mua hàng')
+                a#cancel(href='/') H&#x1EE7;y mua
+else
+    .no-cart
+        .empty-cart
+        h2.note Không có sản phẩm nào trong giỏ
+        .back
+            a.backHomepage(href='/') Trở về trang chủ
+script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+script.
+    var src='/js/header.js';
+    $.getScript(src);
+script.
+    var src='/js/cart.js';
+    $.getScript(src);
