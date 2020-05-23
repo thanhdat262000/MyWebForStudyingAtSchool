@@ -27,17 +27,3 @@ function checkSubmit() {
 	}
 	// return status;
 }
-function returnHomePage() {
-	$(document).ready(function() {
-		$('.backHomepage').click(function(e) {
-			e.preventDefault();
-			$.ajax({
-				url: '/',
-				type: 'GET',
-			}).done(function(res) {
-				console.log(res);
-			})
-			console.log('hello')
-		})
-	})
-}
