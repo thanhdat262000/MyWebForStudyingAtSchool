@@ -20,31 +20,7 @@ module.exports.search= function(req, res) {
 		})
 	})
 }
-// module.exports.shopping = function(req,res) {
-// 	var id = req.signedCookies.sessionId;
-// 	let sql = 'SELECT productId, quantityOrdered FROM orders WHERE customerId =? AND status = "pending"';
-// 	connection.query(sql,[id], function(error,result,field ) {
-// 		var purchasedProducts = [];
-// 		for (var i=0;i<result.length;i++) {
-// 			purchasedProducts.push(result[i].productId);
-// 		}
-// 		var range = '(' + purchasedProducts.toString() + ')';
-// 		let sql_select = 'SELECT * FROM products WHERE productId IN' + range;
-// 		connection.query(sql_select, function(error1,result2,field3) {
-// 			for (var i=0;i<result.length;i++) {
-// 				for (var j=0; j < result2.length;j++) {
-// 					if (result[i].productId == result2[j].productId) {
-// 						result2[j].quantityOrdered = result[i].quantityOrdered;
-// 					}
-// 				}
-// 			}
-// 			res.render('shopping',{
-// 			purchasedProducts: result2,
-// 			title: "Đơn hàng"
-// 		})
-// 		})
-// })
-// }
+
 module.exports.shopping = function(req,res) {
 	var purchasedProducts =[];
 	if (req.session.cart) {
@@ -72,34 +48,20 @@ module.exports.postSuccess = function(req,res) {
 		if (error) throw error;
 	})
 	var query = '';
-	for (var t in req.session.cart) {
-		query += "('"+ orderCode + "',"+ t+','+ req.session.cart[t].quantity+",'"+ req.session.cart[t].buyPrice+"')," 
+	for (var t of req.session.cart) {
+		query += "('"+ orderCode + "',"+ t.productId+','+ t.quantity+",'"+ t.buyPrice+"')," 
 	}
+	req.session.destroy(function(err) {
+		if (err) throw err;
+	})
+	res.locals.session = 0;
 	let sql_details = 'INSERT INTO `orderdetails`(`orderCode`, `productId`, `quantityOrdered`, `priceEach`) VALUES '+ query;
 	sql_details = sql_details.substring(0,sql_details.length-1);
-	console.log(sql_details);
 	connection.query(sql_details, function(error,result,field) {
-		req.session.destroy(function(err) {
-			if (err) throw err;
-		})
-		res.render('success', {
-			title: 'Mua hàng thành công!'
-		})
+		if (error) throw error;
 	})
-	// var orderCode = shortid.generate();
-	// let sql_2 = 'INSERT INTO orders SET orderCode = ?, orderDate = NOW(), customerId = ?, status =?';
-	// connection.query(sql_2, [orderCode,id, 'ordered'],function(error,result,field) {
-	// 	if (error) throw error;
-	// })
-	
-	// let sql_3 = 'INSERT INTO orderdetails SET orderCode =?, p'
-	
+	res.render('success', {
+		title: 'Mua hàng thành công!'
+	})
+
 }
-// module.exports.create = function(req, res) {
-// 	res.render('users/create');
-// }
-// module.exports.postCreate = function(req,res) {
-// 	req.body.id = shortid.generate();
-// 	req.body.avatar = req.file.path.split('/').slice(1).join('/');
-// 	res.redirect('/users');
-// }

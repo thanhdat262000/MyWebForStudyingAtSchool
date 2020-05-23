@@ -133,7 +133,7 @@ block content
                                     p.product-stat-details=product.productWeight
                         br
                         .product-purchase
-                            a.button-purchase(href="/cart/add/"+product.productId, onclick='handleCart("'+product.productId+'")')
+                            a.button-purchase(href="/cart/add/"+product.productId)
                                 i.fa.fa-plus(style='text-align: center;')
             each product in products
                 +productCom(product)(class=product.productImage)
@@ -191,4 +191,3 @@ block content
         .footer-bottom
             | Copyright by &copy; LION KING
     script(type='text/javascript', src='/js/header.js')
-    script(type='text/javascript', src='/js/cart.js')

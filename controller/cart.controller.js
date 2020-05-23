@@ -34,7 +34,7 @@ module.exports.add = function(req, res) {
 		}
 		else {
 			req.session.countTotal++;
-			req.session.totalPrice += result[0].buyPrice;
+			req.session.totalPrice +=result[0].buyPrice;
 		}
 		if (!req.session.cart) {
 			req.session.cart = [];

@@ -31,7 +31,7 @@ module.exports.asus =  function(req, res) {
 	})
 }
 module.exports.hp =  function(req, res) {
-	var productBrand = 'Asus';
+	var productBrand = 'Hp';
 	let sql = 'SELECT productId,`productName`, `productBrand`, `productScreen`, `productCPU`, `productRAM`, `productVGA`, `productOS`, `productWeight`, `productImage`, FORMAT(`buyPrice`,0) buyPrice FROM `products` WHERE productBrand =? '
 	connection.query(sql, [productBrand],function(error, result, field) {
 		res.render('product/asus', {
@@ -41,7 +41,7 @@ module.exports.hp =  function(req, res) {
 	})
 }
 module.exports.lenovo =  function(req, res) {
-	var productBrand = 'Macbook';
+	var productBrand = 'Lenovo';
 	let sql = 'SELECT productId,`productName`, `productBrand`, `productScreen`, `productCPU`, `productRAM`, `productVGA`, `productOS`, `productWeight`, `productImage`, FORMAT(`buyPrice`,0) buyPrice FROM `products` WHERE productBrand =? '
 	connection.query(sql, [productBrand],function(error, result, field) {
 		res.render('product/macbook', {
