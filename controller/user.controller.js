@@ -47,9 +47,11 @@ module.exports.search= function(req, res) {
 // }
 module.exports.shopping = function(req,res) {
 	var purchasedProducts =[];
-	for (var t in req.session.cart) {
-		purchasedProducts.push(req.session.cart[t]);
+	if (req.session.cart) {
+		for (var t of req.session.cart) {
+		purchasedProducts.push(t);
 	}
+}
 	res.render('shopping', {
 		purchasedProducts: purchasedProducts,
 		title: "Đơn hàng"
