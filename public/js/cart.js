@@ -1,37 +1,69 @@
-function handleCart(data) {
-	data1 = JSON.parse(data);
-	if (sessionStorage.length == 0) {
-		data1.quantity = 1;
-		sessionStorage.setItem('item0', JSON.stringify(data1))
-	} else {
-		var find = false;
-	// if (data1.quantity == null) {
-	// data1.quantity = 1
-	//  type = sessionStorage.length;
-	// var item = 'item' + type;
-	// sessionStorage.setItem(item , JSON.stringify(data1))
-	// }
-	// else {
-	// 	var quantity = data1.quantityl
-	// data1.quantity = quantity+1;
-	// sessionStorage.setItem('key', JSON.stringify(data1))
-	for (var i=0;i< sessionStorage.length;i++) {
-			var index = 'item' + i;
-			var product = JSON.parse(sessionStorage.getItem(index));
-	 		if(product.productId == data1.productId) {
-	 			find = true;
-	 			var quantity = product.quantity +1;
-	 			data1.quantity = quantity;
-	 			sessionStorage.setItem(index, JSON.stringify(data1))
-	 			break;
-	 	}
-	 	if (!find) {
-	 		var type = sessionStorage.length;
-	 		var item = 'item' + type;
-	 		data1.quantity = 1;
-	 		sessionStorage.setItem(item , JSON.stringify(data1))
-	 	}
-	}
-}
-	
-}
+	$(document).ready(function() {
+		$(".plus").click(function(e){
+			e.preventDefault();
+			var id = $(this).parent().siblings('input').val();
+			var quantity = parseInt($(this).siblings('input').val()) + 1;
+			$(this).siblings('input').val(quantity);
+			var totalPrice = parseInt($('.totalPrice').text())+ parseInt($(this).parent().siblings('.sp-box-price').text());
+			// $('.totalPrice').text(totalPrice);
+			$.ajax({
+				url: '/cart/update',
+				type: 'POST',
+				dataType: 'html',
+				data: {
+					id: id,
+					quantity: quantity,
+					totalPrice: totalPrice,
+					count: 1
+				}
+			}).done(function(data) {
+				$('.main__form').html(data);
+			})
+		})
+		$('.subtract').click(function(e){
+			e.preventDefault();
+			var id = $(this).parent().siblings('input').val();
+			if (parseInt($(this).siblings('input').val()) >1) {
+			var quantity = parseInt($(this).siblings('input').val()) - 1;
+			$(this).siblings('input').val(quantity);
+			var totalPrice = parseInt($('.totalPrice').text())- parseInt($(this).parent().siblings('.sp-box-price').text());
+			// $('.totalPrice').text(totalPrice);
+			$.ajax({
+				url: '/cart/update',
+				type: 'POST',
+				data: {
+					id: id,
+					quantity: quantity,
+					totalPrice: totalPrice,
+					count: -1
+				}
+			}).done(function(data) {
+				$('.main__form').html(data);
+			})
+		}
+		})
+		$('.cancel').click(function(e){
+			e.preventDefault();
+			var id = $(this).siblings('input').val();
+			var count = parseInt($(this).siblings('.sp-box-quantity').children('input').val());
+			var totalPrice = parseInt($('.totalPrice').text())- count*parseInt($(this).siblings('.sp-box-price').text());
+			var total = parseInt($('.countTotal').text()) -1;
+			if (total >=1) $('.countTotal').text(total);
+			else $('.countTotal').remove();
+			// $('.totalPrice').text(totalPrice);
+			$.ajax({
+				url: '/cart/update',
+				type: 'POST',
+				data: {
+					id: id,
+					quantity: 0,
+					totalPrice: totalPrice,
+					count: count*(-1)
+				}
+			}).done(function(data) {
+				$('.main__form').html(data);
+			})
+			$(this).parents(".sp-box").remove();
+		})
+
+	})
