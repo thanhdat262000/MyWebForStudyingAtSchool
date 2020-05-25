@@ -95,48 +95,55 @@ block content
                     div
                         label HP
         .main__distance
+            if searchProduct.length>0
+                .main__star__title Kết quả tìm kiếm cho '#{search}'
         .main__star
-            mixin productCom(product) 
-                .product.product-1
-                    .product-image.product-link-image1
-                        a.link-image(href='/')
-                            .product-link-image(class!=attributes.class)
-                    .product-name
-                        a.product-link(href='/')=product.productName
-                            a
-                    .product-price #{product.buyPrice}đ
-                    .product-description
-                        ul.product-stat
-                            .product-stat-component
-                                li
-                                    b.product-stat-title M&agrave;n h&igrave;nh:
-                                    p.product-stat-details=product.productScreen
-                            .product-stat-component
-                                li
-                                    b.product-stat-title CPU:
-                                    p.product-stat-details=product.productCPU
-                            .product-stat-component
-                                li
-                                    b.product-stat-title RAM:
-                                    p.product-stat-details=product.productRam
-                            .product-stat-component
-                                li
-                                    b.product-stat-title VGA:
-                                    p.product-stat-details=product.productVGA
-                            .product-stat-component
-                                li
-                                    b.product-stat-title HDH:
-                                    p.product-stat-details=product.producOS
-                            .product-stat-component
-                                li
-                                    b.product-stat-title N&#x1EB7;ng:
-                                    p.product-stat-details=product.productWeight
-                        br
-                        .product-purchase
-                            a.button-purchase(href="/cart/add/"+product.productId, onclick='handleCart("'+product.productId+'")')
-                                i.fa.fa-plus(style='text-align: center;')
-            each product in searchProduct
-                +productCom(product)(class=product.productImage)
+            if searchProduct.length>0
+                mixin productCom(product) 
+                    .product.product-1
+                        .product-image.product-link-image1
+                            a.link-image(href='/')
+                                .product-link-image(class!=attributes.class)
+                        .product-name
+                            a.product-link(href='/')=product.productName
+                                a
+                        .product-price #{product.buyPrice}đ
+                        .product-description
+                            ul.product-stat
+                                .product-stat-component
+                                    li
+                                        b.product-stat-title M&agrave;n h&igrave;nh:
+                                        p.product-stat-details=product.productScreen
+                                .product-stat-component
+                                    li
+                                        b.product-stat-title CPU:
+                                        p.product-stat-details=product.productCPU
+                                .product-stat-component
+                                    li
+                                        b.product-stat-title RAM:
+                                        p.product-stat-details=product.productRam
+                                .product-stat-component
+                                    li
+                                        b.product-stat-title VGA:
+                                        p.product-stat-details=product.productVGA
+                                .product-stat-component
+                                    li
+                                        b.product-stat-title HDH:
+                                        p.product-stat-details=product.producOS
+                                .product-stat-component
+                                    li
+                                        b.product-stat-title N&#x1EB7;ng:
+                                        p.product-stat-details=product.productWeight
+                            br
+                            .product-purchase
+                                a.button-purchase(href="/cart/add/"+product.productId, onclick='handleCart("'+product.productId+'")')
+                                    i.fa.fa-plus(style='text-align: center;')
+                each product in searchProduct
+                    +productCom(product)(class=product.productImage)
+            else 
+                .search-not-found
+                    .image
+                    .not-found Không tìm thấy kết quả nào cho '#{search}'
     .main__distance
     .footer
         .inner-footer

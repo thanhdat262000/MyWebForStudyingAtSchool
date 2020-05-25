@@ -226,6 +226,31 @@
 	margin-bottom: 20px;
 	display: flex;
 }
+.main__star__title {
+	margin-left: 160px;
+	padding-bottom: 10px;
+	font-family: sans-serif;
+	font-size: 20px;
+}
 html {
 	scroll-behavior: smooth;
+}
+.search-not-found {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.image {
+	background-image: url(/image/search-not-found.jpg);
+	background-size: cover;
+	background-position: center;
+	width: 600px;
+	height: 300px;
+	margin-bottom: 20px;
+}
+.not-found {
+	font-size: 20px;
+	font-family: sans-serif
 }

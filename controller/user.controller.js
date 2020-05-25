@@ -16,7 +16,8 @@ module.exports.search= function(req, res) {
 	connection.query(sql, function(error, result, field) {
 		res.render('search', {
 			searchProduct: result,
-			title: title
+			title: title,
+			search: req.query.txtSearch
 		})
 	})
 }
