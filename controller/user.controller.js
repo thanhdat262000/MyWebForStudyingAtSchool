@@ -40,11 +40,11 @@ module.exports.postSuccess = function(req,res) {
 	var name = req.body.txtName;
 	var phone= req.body.txtPhone;
 	var address = req.body.txtAddress;
-	let sql = 'UPDATE customers SET customerName =?, phone =?, address =? WHERE customerId =?';
+	let sql = 'UPDATE customers SET customerName =?, phone =?, address =? WHERE customerID =?';
 	connection.query(sql, [name, phone, address, id], function(error, result, field) {
 			if (error) throw error;
 	 })
-	let sql_2 = 'INSERT INTO orders SET status = "ordered", customerId = ?, orderCode = ?, orderDate = NOW()';
+	let sql_2 = 'INSERT INTO orders SET status = "ordered", customerID = ?, orderCode = ?, orderDate = NOW()';
 	connection.query(sql_2, [id, orderCode], function(error, result, field) {
 		if (error) throw error;
 	})
@@ -52,6 +52,10 @@ module.exports.postSuccess = function(req,res) {
 	for (var t of req.session.cart) {
 		query += "('"+ orderCode + "',"+ t.productId+','+ t.quantity+",'"+ t.buyPrice+"')," 
 	}
+	let sql_payment = "INSERT INTO payments SET customerID = ?, orderCOde =?, state = 'pending'";
+	connection.query(sql_payment, [id, orderCode], function(error, result, field) {
+		if (error) throw error;
+	})
 	req.session.destroy(function(err) {
 		if (err) throw err;
 	})
