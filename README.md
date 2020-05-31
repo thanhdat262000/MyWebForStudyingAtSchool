@@ -88,3 +88,72 @@ connection.connect((err)=>{
 		})
 	})
   ~~~
+* Tạo ID cho người dùng khi truy cập trang web (sử dụng cookies)  
+  * Khi người dùng chưa có cookies, sẽ tạo ID và lưu vào database
+  ~~~
+  if (!req.signedCookies.sessionId) {
+		var sessionId = shortId.generate();
+		res.cookie('sessionId', sessionId,{signed: true})
+		var cusId = {customerId: sessionId};
+		let sql = 'INSERT INTO customers SET ?';
+		connection.query(sql, cusId , function(error, result, field) {
+		if (error) throw error;
+	})
+	}
+  ~~~
+  * Khi người dùng đã có cookies:  
+  Kiểm tra xem đã có ID trong database chưa. Nếu chưa có thì thêm ID vào database
+  ~~~
+  let sql = 'SELECT customerId FROM customers WHERE customerId = ?';
+  connection.query(sql,[req.signedCookies.sessionId],function(error,result,field) {
+	if (result.length == 0) {
+		let sql_id = 'INSERT INTO customers SET customerId = ?';
+		connection.query(sql_id,[req.signedCookies.sessionId], function(error,result,field) {
+			if (error) throw error;
+		})
+	}
+  })
+  ~~~
+* Khi khách hàng đặt hàng
+  * Lấy thông tin về khách hàng
+  ~~~
+  var id = req.signedCookies.sessionId;
+	var name = req.body.txtName;
+	var phone= req.body.txtPhone;
+	var address = req.body.txtAddress;
+  ~~~
+  * Thêm thông tin khách hàng vào database
+  ~~~
+  let sql = 'UPDATE customers SET customerName =?, phone =?, address =? WHERE customerID =?';
+	connection.query(sql, [name, phone, address, id], function(error, result, field) {
+			if (error) throw error;
+	 })
+  ~~~
+  * Thêm thông tin cơ bản của đơn hàng (ngày đặt, người đặt,...) vào database
+  ~~~
+  var orderCode = shortid.generate();
+  let sql_2 = 'INSERT INTO orders SET status = "ordered", customerID = ?, orderCode = ?, orderDate = NOW()';
+	connection.query(sql_2, [id, orderCode], function(error, result, field) {
+		if (error) throw error;
+	})
+  ~~~
+  * Thêm đơn thanh toán (trạng thái chưa thanh toán)
+  ~~~
+  let sql_payment = "INSERT INTO payments SET customerID = ?, orderCOde =?, state = 'pending'";
+	connection.query(sql_payment, [id, orderCode], function(error, result, field) {
+		if (error) throw error;
+	})
+  ~~~
+  * Thêm chi tiết thông tin đơn hàng (sản phẩm, số lượng,...) từ session
+  ~~~
+  var query = '';
+	for (var t of req.session.cart) {
+		query += "('"+ orderCode + "',"+ t.productId+','+ t.quantity+",'"+ t.buyPrice+"')," 
+	}
+  let sql_details = 'INSERT INTO `orderdetails`(`orderCode`, `productId`, `quantityOrdered`, `priceEach`) VALUES '+ query;
+	sql_details = sql_details.substring(0,sql_details.length-1);
+	connection.query(sql_details, function(error,result,field) {
+		if (error) throw error;
+	})
+  ~~~
+  
