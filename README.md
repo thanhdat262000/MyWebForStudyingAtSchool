@@ -33,9 +33,9 @@ b. Các dữ liệu cần lưu trữ
 - Dữ liệu về giao dịch thanh toán
 ### II. Thiết kế cơ sở dữ liệu
 #### Thiết kế mô hình thực thể ER
-![ER]()
+![ER](public/image/ER.png)
 #### Mô hình cơ sở dữ liệu (được tạo bằng MySQL)
-![MySQL]()
+![MySQL](public/image/MySQL.png)
 ### III. Các câu lệnh truy vấn MySQL
 Đây là các câu lệnh dùng để lấy, thêm dữ liệu vào cơ sở dữ liệu thông qua thao tác của người dùng
 * Kết nối database
