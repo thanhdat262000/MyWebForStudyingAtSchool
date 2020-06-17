@@ -1,10 +1,11 @@
 ![UET-FIT](public/image/uet-logo.png)
 # BÁO CÁO BÀI TẬP LỚN CƠ SỞ DỮ LIỆU
 ## Chủ đề: Website bán laptop online
+## Link đến trang web: https://lionkingslaptop.herokuapp.com/
   * Môn học: Cơ sở dữ liệu
   * Mã lớp: INT2207 1
   * Giáo viên: TS.Lê Hồng Hải
-## Các thành viên tham gia trong nhóm
+### Các thành viên tham gia trong nhóm
   * Nguyễn Thành Đạt
   * Tạ Quang Ngọc
   * Nguyễn Đăng Nam
